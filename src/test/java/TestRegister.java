@@ -2,6 +2,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,6 +52,8 @@ public class TestRegister {
         objRegisterPage.enterEmail(Email);
         objRegisterPage.enterPassword(Password);
         objRegisterPage.clickButtonRegister();
+        boolean actual = driver.findElement(objRegisterPage.titleEntrance).isDisplayed();
+        Assert.assertTrue(actual);
 
         DeleteUser deleteUser = new DeleteUser();
         Response correctLoginWithExistingUser = deleteUser.getDataUser(new User(Email,Password, Name));

@@ -1,6 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage {
 
@@ -13,6 +14,7 @@ public class LoginPage {
     private By buttonEnterPersonal = By.xpath(".//a[@href='/account']");
     private By buttonEnterRegistration = By.xpath(".//a[@href='/login']");
     private By buttonEnterForgot = By.xpath(".//a[@href='/login']");
+    private By ButtonPlaceOnORDER = By.xpath("//div/button[text()='Оформить заказ']");
 
 
     public LoginPage(WebDriver driver) { this.driver = driver; }
@@ -33,6 +35,12 @@ public class LoginPage {
         new WebDriverWait(driver, 3);
         driver.findElement(fieldPassword).click();
         driver.findElement(fieldPassword).sendKeys(Password);
+    }
+
+    public String getTextPlaceOnOrder() {
+        new WebDriverWait(driver, 3)
+                .until(ExpectedConditions.elementToBeClickable(ButtonPlaceOnORDER));
+        return driver.findElement(ButtonPlaceOnORDER).getText();
     }
 
 }
